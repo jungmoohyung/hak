@@ -1,0 +1,139 @@
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  color : #ffffff
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+
+
+
+
+body{
+	background-position:top;
+	background-image:url('https://ldb-phinf.pstatic.net/20211220_156/1639965484435yagRA_JPEG/THTTaf1gShBsfswSfE952UeRIJqU0k9VYXwKVTDBS7A%3D.jpg');
+    background-size:60%;
+	background-repeat : no-repeat;
+}
+
+table, th, td {
+	border:3px solid black;
+	text-align:center;
+	border-radius: 10px;
+	padding: 10px;
+	/* border-collapse: collapse; */
+}
+table{
+	margin-left:auto;
+	margin-right:auto;
+	width:80%;
+}
+
+.title{
+	width:50%;
+}
+
+.page{
+	text-align:center;
+	
+}
+
+
+.col_hidden{
+	visibility:collapse;
+}
+.button1{
+position: relative;
+right:0;
+top:0;
+}
+.write{
+	border:6px solid black;
+	width:50px;
+	height:50px;
+	background-color:white;
+	box-shadow: 0 0 16px rgb(221,221,221);
+	position:relative;
+	top:20px;
+	left:78%;
+	
+}
+#contentPagemodal{
+	display:none;
+	z-index:1;
+	position:absolute;
+	background-color:rgba(0,0,0,0.8);
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	opacity:1;
+	overflow:auto;
+}
+.contentMain{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	width:50%;
+	height:50%;
+	background-color:white;
+}
+
+.bcontent{
+	height:400px;
+}
+
+.rcontent {
+	background-color:#D6EEEE;
+	width:70%;
+	height:100px;
+}
+.rform {
+	text-align:center;
+	margin:auto;
+}
+.rbutton{
+	width:7%;
+	height:100px;
+}
+.reply{
+	background-color:#D6EEEE;
+	width:80%;
+}
+.rcenter{
+	text-align:center;
+	text-align:-webkit-center;
+}

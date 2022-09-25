@@ -1,0 +1,69 @@
+/* �뻹踰꾧굅 踰꾪듉�쓽 �냽�꽦 */
+.hide{
+	position:fixed;
+	right:50px;
+	bottom:50px;
+	z-index:2;
+}
+/* �븘�씠肄섏쓽 湲곕낯 �겕湲� */
+i{
+ font-size: 50px;
+}
+/* �븯�씠�띁留곹겕 諛묒쨪�젣嫄� */
+a {
+	text-decoration:none;
+}
+/* �븯�씠�띁留곹겕 諛묒쨪諛� 蹂대씪�깋 �젣嫄� */
+a:link,a:visited{
+text-decoration:none;
+color: inherit; /* 蹂대씪�깋 �젣嫄� */
+}
+/* �뿴�뇿紐⑥뼇�쓽 �냽�꽦 */
+.menu1{
+	display:none;
+	position:fixed;
+	bottom:50px;
+	right:50px;
+	z-index:1;
+}
+/* �뻹踰꾧굅 踰꾪듉�쓣 �늻瑜대㈃ �솢�꽦�솕�릺�뒗 �냽�꽦�뱾 */
+.menu1.active{
+	display:block;
+	animation-name:example;
+	animation-duration:1s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-in-out;
+}
+/* �뿴�뇿紐⑥뼇�쓽 �븘�씠肄섏쓽 ��吏곸엫 �젣�뼱 */
+@keyframes example {
+  from {bottom:50px;}
+  to {bottom:130px; right:50px;}
+}
+/* �뤌吏�?�뼹援�?紐⑥뼇�쓽 �븘�씠肄� �냽�꽦 */
+.circle{
+	display:none;
+	position:fixed;
+	bottom:50px;
+	right:50px;
+	width:50px;
+	height:50px;
+	background:#00d3d3;
+	border-radius:50%;	/* �뫁湲�寃� */
+	text-align:center; 	/* 媛�濡쒖젙�젹 */
+	line-height:50px;	/* �꽭濡쒖젙�젹 */
+	border:6px solid #fff;
+	box-shadow: 0 0 16px rgb(221,221,221); /* 媛믪쓽 �닚�꽌�뒗 洹몃┝�옄�쓽�쐞移�(top,left), 洹몃┝�옄 �몢猿�, 洹몃┝�옄 �깋�긽 */
+}
+/* �쐞 �븘�씠肄섏쓽 �솢�꽦�솕 �냽�꽦 */
+.circle.active{
+	display:block;
+	animation-name:example2;
+	animation-duration:1s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-in-out;
+}
+/* �쐞 �븘�씠肄섏쓽 ��吏곸엫 �냽�꽦 �젣�뼱 */
+@keyframes example2 {
+  from {bottom:50px;}
+  to {bottom:200px; right:50px;}
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.chick.mapper.ReplyMapper">
+  <!-- insert의 id 는 메소드 이름과 일치 -->
+  	<insert id="insert">
+  		insert into reply(seqno, content, id, board_seqno)
+  		values( reply_seq.nextval, #{comment}, #{id}, #{boardNo} )
+  	</insert>
+  	
+  	<select id="getList" resultType="com.chick.dto.ReplyVO">
+  		<![CDATA[ 
+	  		SELECT * 
+	  		FROM (
+		  		SELECT /*+INDEX(reply PK_REPLY) */
+			  		rownum rn, seqno, content, id, 
+			  		TO_CHAR(wdate, 'YYYY-MM-DD HH24:MI-SS') as wdate
+		  		FROM reply
+		  		WHERE board_seqno = #{bno}
+		  		AND rownum <= #{cri.currentPage} * #{cri.rowPerPage}
+	  		) WHERE rn > (#{cri.currentPage} - 1) * #{cri.rowPerPage}
+  		]]>
+  	</select>
+  
+  </mapper>

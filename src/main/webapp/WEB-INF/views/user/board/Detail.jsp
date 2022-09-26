@@ -4,6 +4,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <%@ include file = "../header.jsp" %>
 <link href="/resources/css/boardDetail.css" rel="stylesheet">
 <script src="/resources/js/count.js"></script>
@@ -100,14 +101,24 @@ function replyidcheck(id){
 	
 }
 </script>
-
-		<form class="rform" action="/board/replyWrite.jsp" method="post" onsubmit="return replyidcheck('${logid}')">
-			<input type="text" name="rcontent" class="rcontent" placeholder="댓글을 작성하세요" required>
-			<input type="hidden" name="bseqNo" value="${board.seqNo}">
-			<input type="submit" class="rbutton" name="rbutton" value="댓글작성">
-		</form>
-		<center><p id="reply_err_msg" style="color:red;"></p></center>
-
+			<!-- 댓글 등록 폼 -->
+			<div id="replyInput">
+				<input id="comment"type="text" name="rcontent" class="rcontent" placeholder="댓글을 작성하세요" required>
+				<button id="addReplyBtn" class="rbutton" name="rbutton" value="댓글작성">
+				<center><p id="reply_err_msg" style="color:red;"></p></center>
+			</div>
+		
+		<p id="newLine"/>
+		
+		<!-- 댓글 리스트 출력 영역 -->
+		<div id="reply-ul">
+		
+		</div>
+		
+		
+		
+		
+		
 		<div class="reply">
 		<c:set value="${ board.reply }" var="reply" />
 		<c:if test="${ reply != null }">
@@ -127,6 +138,69 @@ function replyidcheck(id){
 		</c:if>
 		</div>
 </div>
+
 <%@ include file = "../footer.jsp" %>
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+<script>
+/* 즉시 실행 함수 (IIFE) 
+  (function(){
+	 문장
+ })
+ */
+
+ var seqno = '<c:out value="${board.seqNo}"/>';
+ var id = '<c:out value="${loginUser.id}"/>'
+$(document).ready(function(){
+	console.log(replyService);
+	
+	console.log("=====================");
+	console.log("Reply get LIST");
+	
+	showList(1);
+	
+	function showList(page){
+		replyService.getList({bno:seqno,page:1}, function(list){
+
+			/* 댓글이 없는 경우 */
+			if(list == null || list.length == 0){
+				$("#reply-ul").html("");
+				return;
+				
+			}
+			/* 댓글이 있는 경우 */
+			var str="";
+			for(var i = 0, len=list.length || 0; i < len; i++){
+				console.log(list[i]);
+				str += "<li><div class='replyRow'>" + list[i].rn + " | " +list[i].id ;
+				str += " | " + list[i].wdate + " | " +list[i].content + "</div></li>";
+			}
+			
+			$("#reply-ul").html(str);
+		});
+	}
+	
+
+		
+	$("#addReplyBtn").on("click",function(e){
+		var comment = document.getElementById("comment").value;
+		
+		var reply ={
+				boardNo : seqno,
+				id:id,
+				comment : comment
+		};
+		replyService.add(reply,function(result){
+			alert("댓글이 등록되었습니다."+result);
+			document.getElementById("comment").value = "";
+			document.getElementById("newLine").innerHTML = "<li>"+reply.comment +"</li>";
+		});
+	});
+	
+	
+	
+	
+});
+</script>
+
 </body>
 </html>

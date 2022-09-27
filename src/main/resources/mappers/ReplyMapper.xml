@@ -4,6 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.chick.mapper.ReplyMapper">
+  
+    <select id="getCountByBno">
+  		SELECT count(seqno) FROM reply WHERE board_seqno = #{bno}
+  	</select>
+  	
   <!-- insert의 id 는 메소드 이름과 일치 -->
   	<insert id="insert">
   		insert into reply(seqno, content, id, board_seqno)
@@ -38,5 +43,7 @@
   	<delete id="delete">
   		DELETE FROM reply WHERE seqno = #{rno} 
   	</delete>
+  	
+
   	
   </mapper>

@@ -21,4 +21,6 @@ public interface ReplyMapper {
 
 	public int delete(Long rno);
 	
+	public int getCountByBno(long bno);
+	
 }

@@ -90,7 +90,7 @@
  			},
  			error : function(xhr,status,er){
  				if(error){
- 					error(er);
+ 					er(error);
  				}
  			}
  		

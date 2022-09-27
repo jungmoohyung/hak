@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chick.dto.Criteria;
 import com.chick.dto.Reply;
+import com.chick.dto.ReplyPageDTO;
 import com.chick.dto.ReplyVO;
 import com.chick.service.Replyservice;
 
@@ -31,29 +32,34 @@ public class ReplyController {
 	@Autowired
 	Replyservice service;
 	
-	@PostMapping(value="add", consumes="application/json", produces= {MediaType.TEXT_PLAIN_VALUE})
+	@PostMapping(value="add", 
+				consumes="application/json", 
+				produces= "text/plain; charset=utf-8")
 	public ResponseEntity<String> create(@RequestBody Reply reply){
 		
 		log.info("ReplyController create() called.."+reply);
 		int rs = service.register(reply);
 		reply.getBoardNo();
-		return rs == 1 ? new ResponseEntity<>("성공",HttpStatus.OK) 
+		return rs == 1 ? new ResponseEntity<>("댓글 등록 완료",HttpStatus.OK) 
 					   : new ResponseEntity<>("실패",HttpStatus.INTERNAL_SERVER_ERROR);
 		
 	}
+	
 	
 	@GetMapping(value="list/{bno}/{page}",
 				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
 							MediaType.APPLICATION_JSON_UTF8_VALUE
 				})
-	public ResponseEntity<List<ReplyVO>> getList(
+	public ResponseEntity<ReplyPageDTO> getList(
 							@PathVariable("bno") long bno,
 							@PathVariable("page") int page){
 		log.info("getList........");
 		Criteria cri = new Criteria(page, 5);
 		
-		return new ResponseEntity<>(service.getList(cri, bno),HttpStatus.OK) ;
+		return new ResponseEntity<>(service.getListPage(cri, bno),HttpStatus.OK) ;
 	}
+	
+	
 	
 	@GetMapping(value="{rno}", 
 				produces= {MediaType.APPLICATION_XML_VALUE,
@@ -83,6 +89,8 @@ public class ReplyController {
 		return service.remove(rno) == 1 ? new ResponseEntity<String>("댓글 삭제 완료", HttpStatus.OK) :
 											new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	
 	
 	
 }	

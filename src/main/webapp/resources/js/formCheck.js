@@ -10,17 +10,6 @@ function del_confirm(seqno){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 function writeCheck(id){
 	var x = new XMLHttpRequest();
 	

@@ -108,11 +108,16 @@ function replyidcheck(id){
 				<center><p id="reply_err_msg" style="color:red;"></p></center>
 			</div>
 		
-		<p id="newLine"/>
+		
 		
 		<!-- 댓글 리스트 출력 영역 -->
-		<div id="reply-ul">
 		
+		<div id="reply-list">
+			<ul class="reply_ul">
+				<li data-rno='74'>
+					<div> 작성자 | 작성일자 | 댓글내용 </div>
+				</li>
+			</ul>
 		</div>
 		
 		
@@ -140,6 +145,29 @@ function replyidcheck(id){
 </div>
 
 <%@ include file = "../footer.jsp" %>
+
+
+<div id="reply_modal">
+	<div class="login" style="margin: 50px; background-image:url('/img/burger.png');" onsubmit="">
+		<div style="vertical-align: middle">
+			<p>
+				<button id="modalCloseBtn" style="position:absolute; top:0; right: 0;"
+					>x</button>
+			</p>
+			
+				<textarea name="content"></textarea>
+				
+				<button id="replyModifyBtn" class="w3-button w3-aqua sub">댓글수정</button> 
+				<button id="replyDeleteBtn" class="w3-button w3-aqua sub">댓글삭제</button>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <script>
 /* 즉시 실행 함수 (IIFE) 
@@ -156,6 +184,53 @@ $(document).ready(function(){
 	console.log("=====================");
 	console.log("Reply get LIST");
 	
+	
+	var modal = $("#reply_modal");
+	var modal_content = modal.find("textarea[name='content']")
+	modal.hide();
+	
+	$("#modalCloseBtn").on("click", function(e){
+		modal.hide();
+	});
+	
+	$(".reply_ul").on("click", "li", function(e){
+		var rno = $(this).data("rno");
+		
+		replyService.get(rno, function(data){
+			console.log("REPLY GET DATA");
+			console.log("댓글:"+rno+"번내용"+data.content);
+			modal_content.val(data.content);
+			modal.data("rno",data.seqno);
+		}) 
+		modal.show();
+	});
+ 	
+	/* 댓글 수정버튼 클릭 시 */
+	$("#replyModifyBtn").on("click",function(e){
+		console.log("댓글 수정 번호 :" + modal.data("rno"));
+		console.log("댓글 수정 내용 :" + modal_content.val());
+		
+		var reply = {seqno : modal.data("rno"),
+					content : modal_content.val()};
+		
+ 		replyService.update(reply, function(result){
+			alert(result);
+			modal.hide();
+			showList(1);
+		}); 
+	});
+	
+	/* 댓글 삭제 버튼 클릭시 */
+	$("#replyDeleteBtn").on("click", function(e){
+		var rno = modal.data("rno");
+		console.log("댓글 삭제번호:" + rno);
+		replyService.remove(rno, function(result){
+			alert(result);
+			modal.hide();
+			showList(1);
+		})
+	});
+	
 	showList(1);
 	
 	function showList(page){
@@ -163,7 +238,7 @@ $(document).ready(function(){
 
 			/* 댓글이 없는 경우 */
 			if(list == null || list.length == 0){
-				$("#reply-ul").html("");
+				$(".reply_ul").html("");
 				return;
 				
 			}
@@ -171,11 +246,11 @@ $(document).ready(function(){
 			var str="";
 			for(var i = 0, len=list.length || 0; i < len; i++){
 				console.log(list[i]);
-				str += "<li><div class='replyRow'>" + list[i].rn + " | " +list[i].id ;
+				str += "<li data-rno='"+list[i].seqno +"'><div class='replyRow'>" + list[i].rn + " | " +list[i].id ;
 				str += " | " + list[i].wdate + " | " +list[i].content + "</div></li>";
 			}
 			
-			$("#reply-ul").html(str);
+			$(".reply_ul").html(str);
 		});
 	}
 	

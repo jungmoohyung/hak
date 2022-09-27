@@ -13,5 +13,11 @@ public interface Replyservice {
 	public int register(Reply reply);
 
 	public List<ReplyVO> getList(Criteria cri, long bno);
+
+	public ReplyVO get(Long rno);
+
+	public int modify(ReplyVO vo);
+
+	public int remove(Long rno);
 	
 }

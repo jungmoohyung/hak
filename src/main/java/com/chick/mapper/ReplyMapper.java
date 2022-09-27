@@ -14,5 +14,11 @@ public interface ReplyMapper {
 	public int insert(Reply reply);
 
 	public List<ReplyVO> getList(@Param("cri") Criteria cri,@Param("bno") long bno);
+
+	public ReplyVO read(Long rno);
+
+	public int modify(ReplyVO vo);
+
+	public int delete(Long rno);
 	
 }

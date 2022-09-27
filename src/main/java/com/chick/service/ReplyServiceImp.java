@@ -34,4 +34,24 @@ public class ReplyServiceImp implements Replyservice {
 		return mapper.getList(cri,bno);
 	}
 
+
+	@Override
+	public ReplyVO get(Long rno) {
+		
+		return mapper.read(rno);
+	}
+
+
+	@Override
+	public int modify(ReplyVO vo) {
+		
+		return mapper.modify(vo);
+	}
+
+
+	@Override
+	public int remove(Long rno) {
+		return mapper.delete(rno);
+	}
+
 }

@@ -24,4 +24,19 @@
   		]]>
   	</select>
   
+  
+  	<select id="read" resultType="com.chick.dto.ReplyVO">
+  		SELECT *
+  		FROM reply
+  		WHERE seqno = #{rno}
+  	</select>
+  	
+  	<update id="modify">
+  		UPDATE reply SET content = #{content} WHERE seqno = #{seqno}
+  	</update>
+  	
+  	<delete id="delete">
+  		DELETE FROM reply WHERE seqno = #{rno} 
+  	</delete>
+  	
   </mapper>

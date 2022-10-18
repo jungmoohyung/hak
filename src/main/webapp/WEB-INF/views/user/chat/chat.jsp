@@ -17,7 +17,7 @@
 		<br>
 		<input type="text" id="targetUser" placeholder="대화상대id">
 		<input type="text" id="chatMsg" placeholder="메세지를 입력하세요">
-		<input type="button" id="sendBtn" placeholder="전송">
+		<input type="button" id="sendBtn" value="전송">
 	</div>
 
 	<script>
@@ -43,9 +43,8 @@
 			};
 			
 			ws.onmessage = function(e){
-				console.log('받은 메세지:'+e.data);
-//				var data = e.data;
-//				addMsg(data);
+				console.log('서버로부터 받은 메세지:'+e.data);
+				addMsg(e.data);
 			};
 			
 			ws.onclose = function(){
@@ -62,7 +61,7 @@
 				chat = chat + "\n["+userid+"]"+$("#chatMsg").val();
 				$("#msgArea").val(chat);
 				sendMsg();
-				#("#chatMsg").val("");
+				$("#chatMsg").val("");
 				
 			});
 
@@ -73,10 +72,16 @@
 			var msg = {
 				type : "chat",
 				target : $("#targetUser").val(),
-				message : $("#chatMsg").val()
+				message : $("#chatMsg").val(),
+				userid : userid
 			};
+			ws.send(JSON.stringify(msg));
 		}
-		
+		function addMsg(msg){
+			var chat = $('#msgArea').val();
+			chat = chat + "\n" + msg;
+			$('#msgArea').val(chat);
+		}
 	</script>
 
 </body>

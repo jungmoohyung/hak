@@ -35,7 +35,7 @@
  		
  		$.getJSON("/reply/list/"+bno+"/"+page+".json",function(data){
  			if(callback){
- 				callback(data);
+ 				callback(data.total, data.reply);
  			}
  		}).fail(function(xhr,status,err){ 
  			if(error){

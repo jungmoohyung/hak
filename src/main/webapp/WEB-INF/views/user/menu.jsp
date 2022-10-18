@@ -6,5 +6,6 @@
   <a href="/home.jsp#about">ABOUT</a>
   <a href="/home.jsp#menu">MENU</a>
   <a href="/home.jsp#where">WHERE</a>
+  <a class="chat" href="/chat">채팅</a>
   <a href="/board/memReg2Board.jsp" style="float:right">login</a>
 </div>

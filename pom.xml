@@ -49,6 +49,38 @@
 		    <scope>test</scope>
 		</dependency>
 		
+		<!-- 웹 채팅용 		-->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-messaging</artifactId>
+		    <version>5.0.7.RELEASE</version>
+		</dependency>
+				
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20220924</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
+		<dependency>
+		    <groupId>javax.websocket</groupId>
+		    <artifactId>javax.websocket-api</artifactId>
+		    <version>1.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- 여기까지가 채팅용 -->
+		
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -156,7 +188,7 @@
 		</dependency>
 		    
 		    
-		    
+		<!-- json -->    
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -179,10 +211,10 @@
 		    <artifactId>gson</artifactId>
 		    <version>2.9.0</version>
 		</dependency>
+		<!-- 여기까지가 json -->		        
 				        
 				        
-				        
-				        
+		<!-- 파일아이템 -->		        
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 		    <groupId>commons-io</groupId>
@@ -196,23 +228,26 @@
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>1.4</version>
 		</dependency>
-
+		<!-- 여기까지가 파일아이템 -->
+		<!-- 섬네일 -->
 		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
 		<dependency>
 		    <groupId>net.coobird</groupId>
 		    <artifactId>thumbnailator</artifactId>
 		    <version>0.4.17</version>
 		</dependency>
+		<!-- 여기까지가 섬네일 -->
 		
-		
-		
+		<!-- sql 스파이 -->
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
 		<dependency>
 		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
 		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 		    <version>1.16</version>
 		</dependency>
+		<!-- 여기까지가 sql 스파이 -->
 		
+		<!-- 마이바티스 -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
@@ -226,9 +261,8 @@
 		    <artifactId>mybatis-spring</artifactId>
 		    <version>2.0.6</version>
 		</dependency>
-		
-		
-		
+
+		<!-- 여기까지가 마이바티스 -->
 		
 		
 		

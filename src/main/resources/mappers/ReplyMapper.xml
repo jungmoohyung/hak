@@ -5,7 +5,7 @@
   
   <mapper namespace="com.chick.mapper.ReplyMapper">
   
-    <select id="getCountByBno">
+    <select id="getCountByBno" resultType="int">
   		SELECT count(seqno) FROM reply WHERE board_seqno = #{bno}
   	</select>
   	
@@ -22,7 +22,7 @@
 		  		SELECT /*+INDEX(reply PK_REPLY) */
 			  		rownum rn, seqno, content, id, 
 			  		TO_CHAR(wdate, 'YYYY-MM-DD HH24:MI-SS') as wdate
-		  		FROM reply
+		  		FROM (select * from reply order by wdate desc)
 		  		WHERE board_seqno = #{bno}
 		  		AND rownum <= #{cri.currentPage} * #{cri.rowPerPage}
 	  		) WHERE rn > (#{cri.currentPage} - 1) * #{cri.rowPerPage}

@@ -56,6 +56,7 @@ public class ReplyController {
 		log.info("getList........");
 		Criteria cri = new Criteria(page, 5);
 		
+		log.info("******************************************"+service.getListPage(cri, bno).getTotal());
 		return new ResponseEntity<>(service.getListPage(cri, bno),HttpStatus.OK) ;
 	}
 	
